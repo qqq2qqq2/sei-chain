@@ -28,3 +28,9 @@ func (g GasWrapper) RefundGas(amount sdk.Gas, descriptor string) {
 
 	g.GasMeter.RefundGas(amount, descriptor)
 }
+func (g GasWrapper) RefundGas(amount sdk.Gas, descriptor string) {
+	g.mu.Lock()
+	defer g.mu.Unlock()
+
+	g.GasMeter.RefundGas(amount, descriptor)
+}
